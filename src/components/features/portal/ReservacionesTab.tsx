@@ -23,7 +23,7 @@ export function ReservacionesTab({
   const [dateFilter, setDateFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dispatchFilter, setDispatchFilter] = useState("all");
-
+  const [codeFilter, setCodeFilter] = useState("");
 
   const handleToggleEstadoPagoReservacion = async (res: ReservacionDto) => {
     if (!token) return;
@@ -65,12 +65,15 @@ export function ReservacionesTab({
 
   const activeReservations = reservaciones.filter((r) => r.estadoPago !== "pagado");
   const filteredReservations = activeReservations.filter((res) => {
+    const normalizedCode = codeFilter.trim().replace(/^#/, "").toUpperCase();
+    const shortCode = res.id.substring(0, 8).toUpperCase();
+    const matchesCode = !normalizedCode || res.id.toUpperCase().includes(normalizedCode) || shortCode.includes(normalizedCode);
     const matchesDate = !dateFilter || res.fechaReserva.slice(0, 10) === dateFilter;
     const matchesStatus = statusFilter === "all" || res.estadoPago === statusFilter;
     const isDispatched = res.estadoDespacho === "despachado" || res.estadoDespacho === "entregado";
     const matchesDispatch = dispatchFilter === "all" || (dispatchFilter === "yes" ? isDispatched : !isDispatched);
 
-    return matchesDate && matchesStatus && matchesDispatch;
+    return matchesCode && matchesDate && matchesStatus && matchesDispatch;
   });
 
   return (
