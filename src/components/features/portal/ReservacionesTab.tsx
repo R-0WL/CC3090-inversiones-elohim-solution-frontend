@@ -20,6 +20,7 @@ export function ReservacionesTab({
   onRefresh,
 }: ReservacionesTabProps) {
   const t = useTranslations("Reservaciones");
+  const [dateFilter, setDateFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dispatchFilter, setDispatchFilter] = useState("all");
 
@@ -64,11 +65,12 @@ export function ReservacionesTab({
 
   const activeReservations = reservaciones.filter((r) => r.estadoPago !== "pagado");
   const filteredReservations = activeReservations.filter((res) => {
+    const matchesDate = !dateFilter || res.fechaReserva.slice(0, 10) === dateFilter;
     const matchesStatus = statusFilter === "all" || res.estadoPago === statusFilter;
     const isDispatched = res.estadoDespacho === "despachado" || res.estadoDespacho === "entregado";
     const matchesDispatch = dispatchFilter === "all" || (dispatchFilter === "yes" ? isDispatched : !isDispatched);
 
-    return matchesStatus && matchesDispatch;
+    return matchesDate && matchesStatus && matchesDispatch;
   });
 
   return (
