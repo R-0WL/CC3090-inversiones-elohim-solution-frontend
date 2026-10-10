@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Calendar, Loader2, Search } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, Loader2, Search } from "lucide-react";
 import { toast } from "sonner";
 import { cambiarEstadoReservacion, type ReservacionDto } from "@/lib/api/admin";
 
@@ -24,6 +24,8 @@ export function ReservacionesTab({
   const [statusFilter, setStatusFilter] = useState("all");
   const [dispatchFilter, setDispatchFilter] = useState("all");
   const [codeFilter, setCodeFilter] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 20;
 
   const handleToggleEstadoPagoReservacion = async (res: ReservacionDto) => {
     if (!token) return;
@@ -75,6 +77,19 @@ export function ReservacionesTab({
 
     return matchesCode && matchesDate && matchesStatus && matchesDispatch;
   });
+  const totalPages = Math.ceil(filteredReservations.length / pageSize);
+  const displayedPage = Math.min(currentPage, Math.max(totalPages, 1));
+  const paginatedReservations = filteredReservations.slice(
+    (displayedPage - 1) * pageSize,
+    displayedPage * pageSize,
+  );
+  const firstDisplayedReservation = (displayedPage - 1) * pageSize + 1;
+  const lastDisplayedReservation = Math.min(displayedPage * pageSize, filteredReservations.length);
+
+  const resetPageAnd = (updateFilter: () => void) => {
+    updateFilter();
+    setCurrentPage(1);
+  };
 
   return (
     <div className="space-y-6">
@@ -91,7 +106,7 @@ export function ReservacionesTab({
             <input
               type="search"
               value={codeFilter}
-              onChange={(event) => setCodeFilter(event.target.value)}
+              onChange={(event) => resetPageAnd(() => setCodeFilter(event.target.value))}
               placeholder={t("filter_code_placeholder")}
               className="h-10 w-full rounded-md border border-slate-800 bg-slate-950 pl-9 pr-3 text-sm font-normal normal-case tracking-normal text-white outline-none transition-colors placeholder:text-slate-600 focus:border-[#22D3A6]"
             />
@@ -102,7 +117,7 @@ export function ReservacionesTab({
           <input
             type="date"
             value={dateFilter}
-            onChange={(event) => setDateFilter(event.target.value)}
+            onChange={(event) => resetPageAnd(() => setDateFilter(event.target.value))}
             className="h-10 rounded-md border border-slate-800 bg-slate-950 px-3 text-sm font-normal normal-case tracking-normal text-white outline-none transition-colors focus:border-[#22D3A6]"
           />
         </label>
@@ -110,7 +125,7 @@ export function ReservacionesTab({
           {t("filter_status")}
           <select
             value={statusFilter}
-            onChange={(event) => setStatusFilter(event.target.value)}
+            onChange={(event) => resetPageAnd(() => setStatusFilter(event.target.value))}
             className="h-10 rounded-md border border-slate-800 bg-slate-950 px-3 text-sm font-normal normal-case tracking-normal text-white outline-none transition-colors focus:border-[#22D3A6]"
           >
             <option value="all">{t("filter_all")}</option>
@@ -122,7 +137,7 @@ export function ReservacionesTab({
           {t("filter_dispatch")}
           <select
             value={dispatchFilter}
-            onChange={(event) => setDispatchFilter(event.target.value)}
+            onChange={(event) => resetPageAnd(() => setDispatchFilter(event.target.value))}
             className="h-10 rounded-md border border-slate-800 bg-slate-950 px-3 text-sm font-normal normal-case tracking-normal text-white outline-none transition-colors focus:border-[#22D3A6]"
           >
             <option value="all">{t("filter_all")}</option>
@@ -158,7 +173,7 @@ export function ReservacionesTab({
                 </tr>
               </thead>
               <tbody>
-                {filteredReservations.map((res) => (
+                {paginatedReservations.map((res) => (
                   <tr
                     key={res.id}
                     className="border-b border-slate-900/55 hover:bg-slate-950/30 transition-all"
@@ -209,6 +224,40 @@ export function ReservacionesTab({
               </tbody>
             </table>
           </div>
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between gap-3 border-t border-slate-900 px-4 py-3">
+              <span className="text-xs text-slate-400">
+                {t("pagination_status", {
+                  from: firstDisplayedReservation,
+                  to: lastDisplayedReservation,
+                  total: filteredReservations.length,
+                })}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
+                  disabled={displayedPage === 1}
+                  aria-label={t("pagination_previous")}
+                  className="rounded-md border border-slate-800 p-2 text-slate-300 transition-colors hover:border-[#22D3A6] hover:text-[#22D3A6] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <span className="min-w-20 text-center text-xs font-bold text-slate-300">
+                  {t("pagination_page", { page: displayedPage, totalPages })}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
+                  disabled={displayedPage === totalPages}
+                  aria-label={t("pagination_next")}
+                  className="rounded-md border border-slate-800 p-2 text-slate-300 transition-colors hover:border-[#22D3A6] hover:text-[#22D3A6] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
