@@ -1,3 +1,14 @@
+---
+title: "Taller Norte redujo el tiempo de confirmación"
+description: "## `taller-norte`"
+author: "René Abella"
+date: "2026-10-22"
+tags: ["Servicios", "Solicitudes", "Seguimiento"]
+faq:
+  - question: "¿Cómo sabe el cliente qué ocurre con su solicitud?"
+    answer: "Cada solicitud tiene un estado visible, lo que facilita la confirmación y el seguimiento sin depender de intercambios repetidos de mensajes."
+---
+
 # Taller Norte redujo el tiempo de confirmación
 
 ## `taller-norte`

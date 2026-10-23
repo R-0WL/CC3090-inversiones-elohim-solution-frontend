@@ -1,3 +1,14 @@
+---
+title: "La tienda de cosmética natural recuperó compras mediante restablecimiento seguro por OTP"
+description: "## `cosmetica-natural-recuperacion-otp`"
+author: "José Rivera"
+date: "2026-10-22"
+tags: ["Seguridad de cuenta", "OTP", "Tienda en línea"]
+faq:
+  - question: "¿Qué pasa con el carrito al recuperar la cuenta?"
+    answer: "La clienta recupera el acceso mediante un código de un solo uso y puede continuar la compra con los productos que ya había seleccionado."
+---
+
 # La tienda de cosmética natural recuperó compras mediante restablecimiento seguro por OTP
 
 ## `cosmetica-natural-recuperacion-otp`

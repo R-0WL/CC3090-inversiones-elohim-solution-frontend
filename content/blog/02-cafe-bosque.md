@@ -1,3 +1,14 @@
+---
+title: "Café Bosque dejó de perder pedidos en mensajes"
+description: "## `cafe-bosque`"
+author: "José Rivera"
+date: "2026-10-22"
+tags: ["Alimentos", "Tienda en línea", "Pedidos"]
+faq:
+  - question: "¿Cómo ayuda la tienda a Café Bosque a dejar de perder pedidos?"
+    answer: "Centraliza los pedidos que antes llegaban por mensajes y conecta la compra de las mezclas con el inventario, el pago y el seguimiento."
+---
+
 # Café Bosque dejó de perder pedidos en mensajes
 
 ## `cafe-bosque`

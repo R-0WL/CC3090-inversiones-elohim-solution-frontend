@@ -1,3 +1,14 @@
+---
+title: "La distribuidora de smartphones personalizó precios para compradores mayoristas"
+description: "## `smartphones-precios-mayoristas`"
+author: "José Rivera"
+date: "2026-10-22"
+tags: ["B2B", "Precios mayoristas", "Tecnología"]
+faq:
+  - question: "¿Cómo reciben precios de distribuidor los compradores empresariales?"
+    answer: "Una cuenta corporativa habilita condiciones mayoristas y ayuda a coordinar pedidos como el retiro de quince teléfonos desde una bodega central."
+---
+
 # La distribuidora de smartphones personalizó precios para compradores mayoristas
 
 ## `smartphones-precios-mayoristas`

@@ -1,3 +1,14 @@
+---
+title: "Pan de Barrio convirtió sus preventas en rutina"
+description: "## `pan-de-barrio`"
+author: "José Rivera"
+date: "2026-10-22"
+tags: ["Alimentos", "Preventas", "Pedidos"]
+faq:
+  - question: "¿Cómo organiza Pan de Barrio las preventas?"
+    answer: "Agrupa los pedidos y define cortes claros para planificar la preparación y atender la demanda con una rutina más previsible."
+---
+
 # Pan de Barrio convirtió sus preventas en rutina
 
 ## `pan-de-barrio`

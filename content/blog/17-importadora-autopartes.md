@@ -1,3 +1,14 @@
+---
+title: "La importadora de autopartes aceleró la búsqueda de repuestos por SKU"
+description: "## `autopartes-busqueda-sku`"
+author: "Arturo Lima"
+date: "2026-10-22"
+tags: ["Autopartes", "Búsqueda por SKU", "Inventario"]
+faq:
+  - question: "¿Cómo encuentra un mecánico el repuesto correcto?"
+    answer: "Puede buscar el repuesto por su SKU exacto y enviar una referencia precisa a la bodega para preparar la pieza correspondiente."
+---
+
 # La importadora de autopartes aceleró la búsqueda de repuestos por SKU
 
 ## `autopartes-busqueda-sku`

@@ -1,3 +1,14 @@
+---
+title: "Finca La Nube empezó a vender productos de temporada"
+description: "## `finca-la-nube`"
+author: "Arturo Lima"
+date: "2026-10-22"
+tags: ["Alimentos", "Productos de temporada", "Pedidos"]
+faq:
+  - question: "¿Para qué sirve la vitrina digital de Finca La Nube?"
+    answer: "Presenta el origen de los productos de temporada y permite recibir pedidos con información de disponibilidad más clara para el equipo y sus clientes."
+---
+
 # Finca La Nube empezó a vender productos de temporada
 
 ## `finca-la-nube`

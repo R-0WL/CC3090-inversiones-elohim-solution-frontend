@@ -1,3 +1,14 @@
+---
+title: "Almacén La 28 convirtió su catálogo en un canal de ventas"
+description: "## `almacen-la-28`"
+author: "Iván Morataya"
+date: "2026-10-22"
+tags: ["Retail", "Catálogo", "Pedidos"]
+faq:
+  - question: "¿Qué mejora ofrece un catálogo conectado con la operación?"
+    answer: "Permite mostrar información organizada y mantener el inventario, los pedidos y el seguimiento dentro de un mismo flujo para responder de forma consistente."
+---
+
 # Almacén La 28 convirtió su catálogo en un canal de ventas
 
 ## `almacen-la-28`

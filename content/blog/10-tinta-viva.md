@@ -1,3 +1,14 @@
+---
+title: "Tinta Viva lanzó su primera tienda online"
+description: "## `tinta-viva`"
+author: "Angel Chavez"
+date: "2026-10-22"
+tags: ["Retail", "Marca", "Tienda en línea"]
+faq:
+  - question: "¿Qué permite a Tinta Viva lanzar su primera tienda online?"
+    answer: "Una experiencia de marca preparada para presentar su colección y convertir el interés de los clientes en pedidos gestionables."
+---
+
 # Tinta Viva lanzó su primera tienda online
 
 ## `tinta-viva`

@@ -1,3 +1,14 @@
+---
+title: "Ruta Verde coordinó entregas sin llamadas"
+description: "## `ruta-verde`"
+author: "Gaincarlo Sagastume"
+date: "2026-10-22"
+tags: ["Servicios", "Entregas", "Logística"]
+faq:
+  - question: "¿Cómo coordina Ruta Verde las entregas sin llamadas?"
+    answer: "Centraliza la información operativa y el seguimiento de cada entrega, dando al equipo más visibilidad y a los clientes información más confiable."
+---
+
 # Ruta Verde coordinó entregas sin llamadas
 
 ## `ruta-verde`

@@ -1,3 +1,14 @@
+---
+title: "La distribuidora de calzado industrial gestionó una dotación de múltiples tallas"
+description: "## `calzado-industrial-dotacion-b2b`"
+author: "Iván Morataya"
+date: "2026-10-22"
+tags: ["B2B", "Calzado industrial", "Variantes"]
+faq:
+  - question: "¿Cómo se gestiona una dotación con varias tallas?"
+    answer: "La orden reúne las variantes por talla y la tarifa por volumen, mientras el inventario conserva el control de las existencias disponibles."
+---
+
 # La distribuidora de calzado industrial gestionó una dotación de múltiples tallas
 
 ## `calzado-industrial-dotacion-b2b`

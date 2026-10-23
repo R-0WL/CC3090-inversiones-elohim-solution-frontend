@@ -1,3 +1,14 @@
+---
+title: "Estudio Loto ordenó sus reservas en una sola vista"
+description: "## `estudio-loto`"
+author: "Gaincarlo Sagastume"
+date: "2026-10-22"
+tags: ["Servicios", "Reservas", "Agenda"]
+faq:
+  - question: "¿Qué problema resuelve la vista centralizada de reservas?"
+    answer: "Ayuda a evitar cruces de agenda y reúne las solicitudes para que el equipo pueda organizar la atención y dedicar más tiempo a cada cliente."
+---
+
 # Estudio Loto ordenó sus reservas en una sola vista
 
 ## `estudio-loto`

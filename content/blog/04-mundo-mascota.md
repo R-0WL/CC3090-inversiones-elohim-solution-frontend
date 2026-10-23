@@ -1,3 +1,14 @@
+---
+title: "Mundo Mascota centralizó inventario entre sucursales"
+description: "## `mundo-mascota`"
+author: "Angel Chavez"
+date: "2026-10-22"
+tags: ["Retail", "Inventario", "Sucursales"]
+faq:
+  - question: "¿Cómo mejora la operación entre sucursales?"
+    answer: "Al centralizar el inventario, el equipo puede consultar existencias y tomar decisiones con información más actualizada en lugar de depender de hojas dispersas."
+---
+
 # Mundo Mascota centralizó inventario entre sucursales
 
 ## `mundo-mascota`

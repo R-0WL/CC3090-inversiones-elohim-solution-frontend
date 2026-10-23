@@ -1,3 +1,14 @@
+---
+title: "La distribuidora de llantas conectó la venta digital con la instalación física"
+description: "## `llantas-instalacion-sucursal`"
+author: "René Abella"
+date: "2026-10-22"
+tags: ["Automotriz", "Inventario", "Servicios"]
+faq:
+  - question: "¿Cómo se coordina la compra con la instalación?"
+    answer: "Una sola orden vincula la compra, la reserva de inventario y la instalación con la sucursal adecuada."
+---
+
 # La distribuidora de llantas conectó la venta digital con la instalación física
 
 ## `llantas-instalacion-sucursal`

@@ -1,3 +1,14 @@
+---
+title: "La tienda de seguridad electrónica convirtió cada venta en información financiera"
+description: "## `seguridad-electronica-reportes`"
+author: "Angel Chavez"
+date: "2026-10-22"
+tags: ["Reportes", "Finanzas", "Seguridad electrónica"]
+faq:
+  - question: "¿Qué información financiera genera cada venta?"
+    answer: "La venta de un kit CCTV alimenta reportes de rentabilidad y produce información que facilita la preparación de datos para contabilidad."
+---
+
 # La tienda de seguridad electrónica convirtió cada venta en información financiera
 
 ## `seguridad-electronica-reportes`

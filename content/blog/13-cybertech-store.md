@@ -1,3 +1,14 @@
+---
+title: "CyberTech coordinó la compra y el armado de una PC de alto rendimiento"
+description: "## `cybertech-pc-alto-rendimiento`"
+author: "Iván Morataya"
+date: "2026-10-22"
+tags: ["Tecnología", "Ensamble", "Pedidos"]
+faq:
+  - question: "¿Cómo se conecta la compra de una PC con su armado?"
+    answer: "La orden digital conserva la información de la compra y permite que el equipo técnico coordine el ensamble y la entrega en sucursal."
+---
+
 # CyberTech coordinó la compra y el armado de una PC de alto rendimiento
 
 ## `cybertech-pc-alto-rendimiento`

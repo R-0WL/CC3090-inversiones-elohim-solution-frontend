@@ -1,3 +1,14 @@
+---
+title: "Casa Mínima diseñó una tienda a la medida"
+description: "## `casa-minima`"
+author: "Iván Morataya"
+date: "2026-10-22"
+tags: ["Retail", "Marca", "Tienda en línea"]
+faq:
+  - question: "¿Qué aporta una tienda diseñada a la medida?"
+    answer: "Permite que la identidad visual de Casa Mínima acompañe la experiencia del cliente durante el recorrido de compra."
+---
+
 # Casa Mínima diseñó una tienda a la medida
 
 ## `casa-minima`

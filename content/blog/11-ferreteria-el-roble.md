@@ -1,3 +1,14 @@
+---
+title: "Ferretería El Roble agilizó ventas mayoristas con retiro en patio"
+description: "## `ferreteria-el-roble`"
+author: "Arturo Lima"
+date: "2026-10-22"
+tags: ["B2B", "Ferretería", "Retiro en sucursal"]
+faq:
+  - question: "¿Qué opciones ofrece el flujo mayorista de Ferretería El Roble?"
+    answer: "Permite gestionar precios mayoristas, pagos corporativos y retiro express en una sucursal preparada para manejar carga pesada."
+---
+
 # Ferretería El Roble agilizó ventas mayoristas con retiro en patio
 
 ## `ferreteria-el-roble`
