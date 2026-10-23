@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Calendar, ChevronLeft, ChevronRight, Loader2, Search } from "lucide-react";
+import { Calendar, Loader2, Search } from "lucide-react";
 import { toast } from "sonner";
 import { cambiarEstadoReservacion, type ReservacionDto } from "@/lib/api/admin";
+import { TablePagination } from "@/components/ui";
 
 interface ReservacionesTabProps {
   token: string;
@@ -20,12 +21,13 @@ export function ReservacionesTab({
   onRefresh,
 }: ReservacionesTabProps) {
   const t = useTranslations("Reservaciones");
+  const [searchQuery, setSearchQuery] = useState("");
   const [dateFilter, setDateFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [dispatchFilter, setDispatchFilter] = useState("all");
   const [codeFilter, setCodeFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 20;
+  const [pageSize, setPageSize] = useState(10);
 
   const handleToggleEstadoPagoReservacion = async (res: ReservacionDto) => {
     if (!token) return;
@@ -65,37 +67,64 @@ export function ReservacionesTab({
     }
   };
 
-  const activeReservations = reservaciones.filter((r) => r.estadoPago !== "pagado");
-  const filteredReservations = activeReservations.filter((res) => {
-    const normalizedCode = codeFilter.trim().replace(/^#/, "").toUpperCase();
-    const shortCode = res.id.substring(0, 8).toUpperCase();
-    const matchesCode = !normalizedCode || res.id.toUpperCase().includes(normalizedCode) || shortCode.includes(normalizedCode);
-    const matchesDate = !dateFilter || res.fechaReserva.slice(0, 10) === dateFilter;
-    const matchesStatus = statusFilter === "all" || res.estadoPago === statusFilter;
-    const isDispatched = res.estadoDespacho === "despachado" || res.estadoDespacho === "entregado";
-    const matchesDispatch = dispatchFilter === "all" || (dispatchFilter === "yes" ? isDispatched : !isDispatched);
+  const activeReservations = useMemo(() => {
+    return reservaciones.filter((r) => r.estadoPago !== "pagado");
+  }, [reservaciones]);
 
-    return matchesCode && matchesDate && matchesStatus && matchesDispatch;
-  });
-  const totalPages = Math.ceil(filteredReservations.length / pageSize);
-  const displayedPage = Math.min(currentPage, Math.max(totalPages, 1));
-  const paginatedReservations = filteredReservations.slice(
-    (displayedPage - 1) * pageSize,
-    displayedPage * pageSize,
-  );
-  const firstDisplayedReservation = (displayedPage - 1) * pageSize + 1;
-  const lastDisplayedReservation = Math.min(displayedPage * pageSize, filteredReservations.length);
+  const filteredReservations = useMemo(() => {
+    const q = searchQuery.toLowerCase().trim();
+    const normalizedCode = codeFilter.trim().replace(/^#/, "").toUpperCase();
+    return activeReservations.filter((r) => {
+      if (q) {
+        const idMatch = r.id.toLowerCase().includes(q);
+        const itemsMatch = r.detalles.some((d) =>
+          d.productoNombre?.toLowerCase().includes(q)
+        );
+        if (!idMatch && !itemsMatch) return false;
+      }
+      const shortCode = r.id.substring(0, 8).toUpperCase();
+      const matchesCode = !normalizedCode || r.id.toUpperCase().includes(normalizedCode) || shortCode.includes(normalizedCode);
+      const matchesDate = !dateFilter || r.fechaReserva.slice(0, 10) === dateFilter;
+      const matchesStatus = statusFilter === "all" || r.estadoPago === statusFilter;
+      const isDispatched = r.estadoDespacho === "despachado" || r.estadoDespacho === "entregado";
+      const matchesDispatch = dispatchFilter === "all" || (dispatchFilter === "yes" ? isDispatched : !isDispatched);
+
+      return matchesCode && matchesDate && matchesStatus && matchesDispatch;
+    });
+  }, [activeReservations, searchQuery, codeFilter, dateFilter, statusFilter, dispatchFilter]);
 
   const resetPageAnd = (updateFilter: () => void) => {
     updateFilter();
     setCurrentPage(1);
   };
 
+  const totalPages = Math.max(1, Math.ceil(filteredReservations.length / pageSize));
+  const safePage = Math.min(Math.max(1, currentPage), totalPages);
+  const pageStart = (safePage - 1) * pageSize;
+  const paginatedReservations = filteredReservations.slice(pageStart, pageStart + pageSize);
+
   return (
     <div className="space-y-6">
-      <div>
-        <h2 className="text-xl font-black text-white">{t("title")}</h2>
-        <p className="text-xs text-slate-400">{t("subtitle")}</p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-black text-white">{t("title")}</h2>
+          <p className="text-xs text-slate-400">{t("subtitle")}</p>
+        </div>
+        {activeReservations.length > 0 && (
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={14} />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setCurrentPage(1);
+              }}
+              placeholder="Buscar por ID o producto..."
+              className="w-full h-9 pl-9 pr-3 rounded-xl border border-slate-800 bg-slate-900/60 text-xs text-slate-200 placeholder:text-slate-500 focus:border-[#22D3A6]/50 focus:outline-none transition-all"
+            />
+          </div>
+        )}
       </div>
 
       <div className="grid gap-3 rounded-xl border border-slate-900 bg-slate-950/20 p-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -151,12 +180,14 @@ export function ReservacionesTab({
         <div className="h-48 flex items-center justify-center">
           <Loader2 className="animate-spin text-[#22D3A6]" size={32} />
         </div>
-      ) : filteredReservations.length === 0 ? (
+      ) : activeReservations.length === 0 ? (
         <div className="rounded-xl border border-dashed border-slate-800 p-12 text-center space-y-3">
           <Calendar className="mx-auto text-slate-600" size={40} />
-          <p className="text-sm text-slate-400">
-            {activeReservations.length === 0 ? t("empty_state") : t("no_filter_results")}
-          </p>
+          <p className="text-sm text-slate-400">{t("empty_state")}</p>
+        </div>
+      ) : filteredReservations.length === 0 ? (
+        <div className="rounded-xl border border-slate-900 bg-slate-950/20 p-8 text-center text-xs text-slate-500">
+          {t("no_filter_results")}
         </div>
       ) : (
         <div className="rounded-xl border border-slate-900 bg-slate-950/20 overflow-hidden">
@@ -224,40 +255,17 @@ export function ReservacionesTab({
               </tbody>
             </table>
           </div>
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between gap-3 border-t border-slate-900 px-4 py-3">
-              <span className="text-xs text-slate-400">
-                {t("pagination_status", {
-                  from: firstDisplayedReservation,
-                  to: lastDisplayedReservation,
-                  total: filteredReservations.length,
-                })}
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
-                  disabled={displayedPage === 1}
-                  aria-label={t("pagination_previous")}
-                  className="rounded-md border border-slate-800 p-2 text-slate-300 transition-colors hover:border-[#22D3A6] hover:text-[#22D3A6] disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  <ChevronLeft size={16} />
-                </button>
-                <span className="min-w-20 text-center text-xs font-bold text-slate-300">
-                  {t("pagination_page", { page: displayedPage, totalPages })}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
-                  disabled={displayedPage === totalPages}
-                  aria-label={t("pagination_next")}
-                  className="rounded-md border border-slate-800 p-2 text-slate-300 transition-colors hover:border-[#22D3A6] hover:text-[#22D3A6] disabled:cursor-not-allowed disabled:opacity-40"
-                >
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
-          )}
+          <TablePagination
+            currentPage={safePage}
+            totalItems={filteredReservations.length}
+            pageSize={pageSize}
+            pageSizeOptions={[10, 20, 30]}
+            onPageChange={setCurrentPage}
+            onPageSizeChange={(newSize) => {
+              setPageSize(newSize);
+              setCurrentPage(1);
+            }}
+          />
         </div>
       )}
     </div>
